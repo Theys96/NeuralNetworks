@@ -1,0 +1,10 @@
+function void = main
+    N = 2;
+    P = 4;
+    
+    % rng('default');
+    [vecs, labels] = generate(P, N);
+    plot_data(vecs, labels);
+    
+    w = zeros([N 1])
+end
