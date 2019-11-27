@@ -8,7 +8,7 @@ n_D    = 100; %number of independently drawn random sets
  
 alphav = [];         %array to be filled with tested values of alpha
 succv = [];          %array to be filled with fraction of correctly separated data sets to vary of alpha
-for P = 2:(N/5):(4*N)    %loop over P
+for P = 2:1:(4*N)    %loop over P
   alpha = P/N;
   alphav = [alphav alpha];
   succ_count = 0;                          %counts number of correctly separated independent data sets
