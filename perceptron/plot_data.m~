@@ -8,21 +8,28 @@ function void = plot_data(vecs, labels, w)
     
     % Plotting of the data points
     scatter(vecs(labels == 1, 1), vecs(labels == 1, 2), 50, 'k', 'filled');
-    xlim([-3 3])
-    ylim([-3 3])
     hold on
     scatter(vecs(labels == -1, 1), vecs(labels == -1, 2), 50, 'k');
     
     % Plotting of the solution vector
     if exist('w','var')
-        theta = 0;
-        if sz(2) == 3
-            theta = w(3);
-        end
-    
+%         if sz(2) == 3
+%             st = w/norm(w)*w(3);
+%         else
+%             st = [0 0];
+%         end
+%         l1 = [0 -1; 1 0]*w(1:2);
+%         l2 = -l1;
+%         plot([0 st(1)], [0 st(2)])
+%         plot([l1(1)+st(1) l2(1)+st(1)], [l1(2)+st(2) l2(2)+st(2)]);
         ax = gca;
         x = [ax.XLim(1) ax.XLim(2)];
-        y = (theta-w(1)*x)/w(2);
+        theta = 0
+        if sz(2) == 3
+            theta = 
+            y = (w(3)-w(1)*x)/w(2);
+        else
+            
         plot(x,y);
     end
     
