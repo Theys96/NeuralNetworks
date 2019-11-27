@@ -2,7 +2,7 @@ function void = main
     N      = 2;
     P      = 15;
     n_max  = 100;
-    augm   = false;
+    augm   = true;
     
     % rng('default');
     for i = 1:10000
