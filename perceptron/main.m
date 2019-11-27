@@ -1,26 +1,20 @@
 function void = main
     N      = 2;
-    P      = 4;
+    P      = 15;
     n_max  = 100;
-    augm   = true;
+    augm   = false;
     
     % rng('default');
-    [vecs, labels] = generate(P, N, augm);
-    
-    w = zeros([(N+augm) 1]);
-    mu = 1;
-    epoch = 1;
-    for sweep = 1:n_max
-        for mu = 1:P
-            cur_sample = vecs(mu,:)';
-            E = dot(w, cur_sample) * labels(mu);
-            if E <= 0
-                w = w + (cur_sample/N * labels(mu));
-            end
-            epoch = epoch + 1;
+    for i = 1:10000
+        [vecs, labels] = generate(P, N, augm);
+        [w, epoch]     = rosenblatt_loop(vecs, labels, n_max);
+        
+        if epoch < n_max
+            fprintf('Finished after %d/%d epochs.\n', epoch, n_max);
+            disp('Solution vector:');
+            disp(w);
+            plot_data(vecs, labels, w);
+            break;
         end
     end
-    
-    w
-    plot_data(vecs, labels, w);
 end

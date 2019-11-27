@@ -5,10 +5,13 @@ function void = plot_data(vecs, labels, w)
     if (sz(2) > 3) || (sz(2) < 2)
         error("plot_data only works for (augmented) 2-dimensional vectors.");
     end
+    
+    % Plotting of the data points
     scatter(vecs(labels == 1, 1), vecs(labels == 1, 2), 50, 'k', 'filled');
     hold on
     scatter(vecs(labels == -1, 1), vecs(labels == -1, 2), 50, 'k');
     
+    % Plotting of the solution vector
     if exist('w','var')
         if sz(2) == 3
             st = w/norm(w)*w(3);
