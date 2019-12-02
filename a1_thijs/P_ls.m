@@ -1,6 +1,6 @@
 function frac = P_ls(P,N)
 %P_LS Computes the fraction of linearly seperable dichotomies for a P sized
-%data set in N dimensions
+%data set in N dimensions analytically
     if (P <= N)
         frac = 1;
     else
