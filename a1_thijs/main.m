@@ -1,14 +1,16 @@
 function void = main
-N      = 5;      % Number of dimensions
+N      = 20;     % Number of dimensions
 n_max  = 100;    % Maximum number of (outer) epochs in the Rosenblatt algorithm
 augm   = false;  % We will disregard augmentation in all our experiments
-n_D    = 100;   % Number of independently drawn random sets
+n_D    = 200;    % Number of independently drawn random sets
 
 P_max = 4*N;
-alpha = zeros(P_max,1);    % Array to be filled with tested values of alpha
-Q_ls  = zeros(P_max,1);    % Array to be filled with fraction of correctly separated data sets to vary of alpha
-for P = 1:1:P_max          % Loop over P (number of data points)
-  alpha(P) = P/N;
+step  = (N/5);
+alpha = zeros(P_max/step,1);    % Array to be filled with tested values of alpha
+Q_ls  = zeros(P_max/step,1);    % Array to be filled with fraction of correctly separated data sets to vary of alpha
+i     = 1;                      % Array iterator
+for P = step:step:P_max    % Loop over P (number of data points)
+  alpha(i) = P/N;
   succ_count = 0;                            % Counts number of correctly separated independent data sets
   for set = 1:n_D                            % Loop over data sets
     [vecs, labels] = generate(P, N, augm);   % Generate random dataset with random +- labels
@@ -18,11 +20,12 @@ for P = 1:1:P_max          % Loop over P (number of data points)
       succ_count = succ_count + 1;
     end
   end
-  Q_ls(P) = succ_count/n_D;
-  fsprintf("%d/%d", P, P_max);
+  Q_ls(i) = succ_count/n_D;
+  fprintf("%.2f/%d\n", P/N, 4);
+  i = i + 1;
 end
 
-scatter(alpha,Q_ls,'filled','MarkerFaceColor','#A2142F','DisplayName','N = 5')
+scatter(alpha,Q_ls,'filled','MarkerFaceColor','#A2142F','DisplayName',sprintf('N = %d', N))
 grid on
 xlabel('\alpha = P/N','FontSize',15);
 ylabel('Q_{l.s.}','FontSize',15);
