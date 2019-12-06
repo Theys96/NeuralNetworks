@@ -18,7 +18,7 @@ function [w,epoch] = rosenblatt_loop(vecs, labels, n_max)
             E = dot(w, cur_sample) * labels(mu);
             if E <= 0
                 cnt = cnt + 1;
-                w = w + (cur_sample * labels(mu))/P;
+                w = w + (cur_sample * labels(mu))/N;
             end
         end
         if (cnt == 0)
