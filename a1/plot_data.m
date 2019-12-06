@@ -5,16 +5,27 @@ function void = plot_data(vecs, labels, w)
     if (sz(2) > 3) || (sz(2) < 2)
         error("plot_data only works for (augmented) 2-dimensional vectors.");
     end
+    
+    % Plotting of the data points
     scatter(vecs(labels == 1, 1), vecs(labels == 1, 2), 50, 'k', 'filled');
-    grid on
+    xlim([-3 3])
+    ylim([-3 3])
     hold on
     scatter(vecs(labels == -1, 1), vecs(labels == -1, 2), 50, 'k');
-    ax = gca;
-    x = [ax.XLim(1) ax.XLim(2)];
-    db = (w(3)-w(1)*x)/w(2);
-    plot(x,db,'color','r','LineWidth',3)
-    quiver(0,w(3)/w(2),w(1),w(2),'color','b')
-    axis equal
+    
+    % Plotting of the solution vector
+    if exist('w','var')
+        theta = 0;
+        if sz(2) == 3
+            theta = w(3);
+        end
+    
+        ax = gca;
+        x = [ax.XLim(1) ax.XLim(2)];
+        y = (theta-w(1)*x)/w(2);
+        plot(x,y);
+    end
+    
     hold off
 end
 
