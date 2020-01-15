@@ -12,11 +12,7 @@ function [frac,embedding] = Q_ls(P, N, augm, n_max, n_D)
       embedding = [embedding es];
     end
   end
-  %embedding = embedding/P; %rescale
   embedding = reshape(embedding,[size(embedding,1)*size(embedding,2),1]);
   frac = succ_count/n_D;
-  figure(P);
-  histogram(embedding,10);
-  title(sprintf('P = %u',P));
 end
 
