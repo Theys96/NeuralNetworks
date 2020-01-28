@@ -5,7 +5,7 @@ augm   = false;  % We will disregard augmentation in all our experiments
 
 % Part 1
 n_max  = 100;    % Maximum number of (outer) epochs in the Rosenblatt algorithm
-n_D    = 50;    % Number of independently drawn random sets
+n_D    = 50;     % Number of independently drawn random sets
 P_max = 4*N;
 step  = N/4;
 arrAlpha = zeros(P_max/step,1);    % Array to be filled with tested values of alpha
@@ -19,10 +19,11 @@ for P = step:step:P_max            % Loop over P (number of data points)
   fprintf("%.2f/%d\n", P/N, 4);
   i = i + 1;
 end
-figure(1)
-stairs(arrAlpha,arrP_ls,'DisplayName',sprintf('P_{l.s.}(P,%d)', N),'Color', 'r','LineWidth',1.5);
+
+figure('Renderer', 'painters', 'Position', [0 0 800 500])
+stairs(arrAlpha,arrP_ls,'DisplayName',sprintf('P_{l.s.}(P,%d)', N),'Color', 'k','LineWidth',1.5);
 hold on
-scatter(arrAlpha,arrQ_ls,50,'o','filled','DisplayName',sprintf('Q_{l.s.}(P,%d), n_{max} = %d, n_D = %d', N, n_max, n_D));
+scatter(arrAlpha,arrQ_ls,70,'r','o','DisplayName',sprintf('Q_{l.s.}(P,%d), n_{max} = %d, n_D = %d', N, n_max, n_D));
 
 
 % Part 2
@@ -39,7 +40,7 @@ for P = step:step:P_max            % Loop over P (number of data points)
   fprintf("%.2f/%d\n", P/N, 4);
   i = i + 1;
 end
-scatter(arrAlpha,arrQ_ls,50,'o','filled','DisplayName',sprintf('Q_{l.s.}(P,%d), n_{max} = %d, n_D = %d', N, n_max, n_D));
+scatter(arrAlpha,arrQ_ls,70,'b','x','DisplayName',sprintf('Q_{l.s.}(P,%d), n_{max} = %d, n_D = %d', N, n_max, n_D));
 
 
 % Plot
