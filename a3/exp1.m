@@ -37,14 +37,14 @@ for i = 1:nPs
   finalMSEgen(i)   = finalMSEg/reps;
 end
 
-figure(nPs+1);
-semilogy(P,finalMSEtrain,'LineStyle','-','LineWidth',1,'Marker','d','MarkerSize',13,'color','r','DisplayName','training error');
+figure('Position', [0 0 900 500]);
+semilogy(P,finalMSEtrain,'LineStyle','-','LineWidth',1.5,'Marker','x','MarkerSize',13,'color','r','MarkerEdgeColor','k','DisplayName','training error');
 hold on
 xlim([-100,2100]);
-semilogy(P,finalMSEgen,'LineStyle','-','LineWidth',1,'Marker','d','MarkerSize',13,'color','b','DisplayName','test error');
-xlabel('P','FontSize',14);
-ylabel('MSE by the end of training','FontSize',14);
-title({'Final error to vary of number of training samples' sprintf('tmax = %g, \\eta = %g, reps = %g',tmax,eta,reps)});
+semilogy(P,finalMSEgen,'LineStyle','-','LineWidth',1.5,'Marker','x','MarkerSize',13,'color','b','MarkerEdgeColor','k','DisplayName','test error (Q = 100)');
+xlabel('P (training set size)','FontSize',14)
+ylabel('Mean square error by the end of training','FontSize',14);
+title({'Final error after training on training sets of various sizes' sprintf('t_{max} = %g, \\eta = %g, %g repetitions',tmax,eta,reps)},'FontSize',14);
 grid on
 lgd = legend;
 lgd.FontSize = 12;

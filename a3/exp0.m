@@ -10,7 +10,7 @@ norm1 = true;
 tmax = 1e5;
 eta = 5e-2;
 
-figure(1)
+figure('Position', [0 0 900 500]);
 [MSEvec_train, MSEvec_gen,w] = main(P,Q,first,nhidden,norm1,tmax,eta);
 subplot(1,2,1);
 plot_MSE(MSEvec_train,MSEvec_gen,tmax,P,Q,eta);

@@ -2,7 +2,7 @@
 
 clear all 
 
-P = 500;
+P = 50; % 500
 Q = 100;
 first = false;
 nhidden = 2;
@@ -14,7 +14,7 @@ nalphas = size(alpha,2);
 
 finalMSEtrain = zeros([1,nalphas]);
 finalMSEgen   = zeros([1,nalphas]);
-reps = 10;
+reps = 1;  % 10
 
 for i = 1:nalphas
   fprintf('doing alpha = %.2f \n',alpha(i));
@@ -37,14 +37,14 @@ for i = 1:nalphas
   finalMSEgen(i)   = finalMSEg/reps; 
 end
 
-figure(nalphas+1);
-loglog(alpha,finalMSEtrain,'LineWidth',2,'Marker','d','MarkerSize',12,'color','r','DisplayName','training error');
+figure('Position', [0 0 900 500]);
+loglog(alpha,finalMSEtrain,'LineWidth',1.5,'Marker','x','MarkerSize',12,'MarkerEdgeColor','k','color','r','DisplayName',sprintf('training error (P = %g)', P));
 hold on
-loglog(alpha,finalMSEgen,'LineWidth',2,'Marker','d','MarkerSize',12,'color','b','DisplayName','test error');
+loglog(alpha,finalMSEgen,'LineWidth',1.5,'Marker','x','MarkerSize',12,'MarkerEdgeColor','k','color','b','DisplayName',sprintf('test error (Q = %g)', Q));
 xlabel('\alpha','FontSize',14);
 xticks([alpha]);
-ylabel('MSE by the end of training','FontSize',14);
-title({'Final error with $\eta(t) = \frac{1}{\alpha + t}$' sprintf('tmax = %g, P = %g, reps = %g',tmax,P,reps)},'FontSize',14,'interpreter','latex');
+ylabel('Mean square error by the end of training','FontSize',14);
+title({'Final error after training with various learning rate schedules' sprintf('t_{max} = %g, %g repetitions',tmax,reps)},'FontSize',14); % ,'interpreter','latex'
 grid on
 lgd = legend;
 lgd.FontSize = 12;

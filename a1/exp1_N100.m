@@ -1,18 +1,19 @@
 % Global parameters
-N      = 20;     % Number of dimensions
+N      = 100;    % Number of dimensions
 augm   = false;  % We will disregard augmentation in all our experiments
 
 
 % Part 1
-n_max  = 100;    % Maximum number of (outer) epochs in the Rosenblatt algorithm
-n_D    = 50;     % Number of independently drawn random sets
-P_max = 4*N;
+n_max  = 1000;   % Maximum number of (outer) epochs in the Rosenblatt algorithm
+n_D    = 500;    % Number of independently drawn random sets
+P_min = 1*N;
+P_max = 3*N;
 step  = N/4;
-arrAlpha = zeros(P_max/step,1);    % Array to be filled with tested values of alpha
-arrQ_ls  = zeros(P_max/step,1);    % Array to be filled with fraction of correctly separated data sets to vary of alpha
-arrP_ls  = zeros(P_max/step,1);    % Array to be filled with probabilities
+arrAlpha = zeros((P_max-P_min)/step,1);    % Array to be filled with tested values of alpha
+arrQ_ls  = zeros((P_max-P_min)/step,1);    % Array to be filled with fraction of correctly separated data sets to vary of alpha
+arrP_ls  = zeros((P_max-P_min)/step,1);    % Array to be filled with probabilities
 i     = 1;                         % Array iterator
-for P = step:step:P_max            % Loop over P (number of data points)
+for P = P_min:step:P_max           % Loop over P (number of data points)
   arrAlpha(i) = P/N;
   arrQ_ls(i) = Q_ls(P, N, augm, n_max, n_D);
   arrP_ls(i) = P_ls(P, N);
@@ -27,13 +28,15 @@ scatter(arrAlpha,arrQ_ls,100,'r','o','LineWidth',1.5,'DisplayName',sprintf('Q_{l
 
 
 % Part 2
-n_max  = 1000;   % Maximum number of (outer) epochs in the Rosenblatt algorithm
+n_max  = 10000;  % Maximum number of (outer) epochs in the Rosenblatt algorithm
 n_D    = 500;    % Number of independently drawn random sets
-arrAlpha = zeros(P_max/step,1);    % Reinitialize
-arrQ_ls  = zeros(P_max/step,1);    % Reinitialize
-arrP_ls  = zeros(P_max/step,1);    % Reinitialize
+P_min  = 1.5*N;
+P_max  = 2.5*N;
+arrAlpha = zeros((P_max-P_min)/step,1);    % Reinitialize
+arrQ_ls  = zeros((P_max-P_min)/step,1);    % Reinitialize
+arrP_ls  = zeros((P_max-P_min)/step,1);    % Reinitialize
 i     = 1;                         % Array iterator
-for P = step:step:P_max            % Loop over P (number of data points)
+for P = P_min:step:P_max            % Loop over P (number of data points)
   arrAlpha(i) = P/N;
   arrQ_ls(i) = Q_ls(P, N, augm, n_max, n_D);
   arrP_ls(i) = P_ls(P, N);

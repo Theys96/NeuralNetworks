@@ -2,7 +2,7 @@
 
 clear all 
 
-P = 500;
+P = 100; % 500
 Q = 100;
 first = false;
 nhidden = 2;
@@ -14,7 +14,7 @@ netas = size(eta,2);
 finalMSEtrain = zeros([1,netas]);
 finalMSEgen   = zeros([1,netas]);
 
-reps = 10;
+reps = 1; % 10
 
 for i = 1:netas
   fprintf('doing eta = %.2f \n',eta(i));
@@ -37,14 +37,14 @@ for i = 1:netas
   finalMSEgen(i)   = finalMSEg/reps;
 end
 
-figure(netas+1);
-loglog(eta,finalMSEtrain,'LineWidth',2,'Marker','d','MarkerSize',12,'color','r','DisplayName','training error');
+figure('Position', [0 0 900 500]);
+loglog(eta,finalMSEtrain,'LineWidth',1.5,'Marker','x','MarkerSize',12,'MarkerEdgeColor','k','color','r','DisplayName','training error');
 hold on
-loglog(eta,finalMSEgen,'LineWidth',2,'Marker','d','MarkerSize',12,'color','b','DisplayName','test error');
-xlabel('\eta','FontSize',14);
+loglog(eta,finalMSEgen,'LineWidth',1.5,'Marker','x','MarkerSize',12,'MarkerEdgeColor','k','color','b','DisplayName','test error');
+xlabel('\eta (step size)','FontSize',14);
 xticks([sort(eta,'ascend')]);
-ylabel('MSE by the end of training','FontSize',14);
-title({'Final error to vary of learning step \eta' sprintf('tmax = %g, P = %g, reps = %g',tmax,P,reps)});
+ylabel('Mean square error by the end of training','FontSize',14);
+title({'Final error after training with various values of \eta' sprintf('t_{max} = %g, P = %g, %g repetitions',tmax,P,reps)},'FontSize',14);
 grid on
 lgd = legend;
 lgd.FontSize = 12;
