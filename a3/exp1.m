@@ -28,7 +28,7 @@ for i = 1:nPs
   %{
   figure(i);
   subplot(1,2,1);
-  plot_MSE(MSEvec_train,MSEvec_gen,tmax,P(i),Q,eta,false);
+  plot_MSE(MSEvec_train,MSEvec_gen,tmax,P(i),Q,eta);
   subplot(1,2,2);
   plot_w(w,nhidden);
   %}

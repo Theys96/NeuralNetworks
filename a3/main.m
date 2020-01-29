@@ -27,16 +27,18 @@ MSEvec_gen = zeros([1,tmax]);   %to store generalization error
 %Training routine. Each "epoch" consists of P single steps; 
 %vectors are presented randomly within the training set (SGD)
 for t = tvec
-  if exist('alpha','var')
+  
+  if exist('alpha','var') %eta(t) schedule
     if t == 1
       eta0 = eta;
     end
-    eta = eta0/(t+alpha);
+    eta = eta0/(t+alpha)
   end
-  rdm_indices = randi(P); %extract P random examples within the training set
-                          %Note: this way the same example might be
-                          %presented more than once
-  for k = rdm_indices
+  
+  for pattern = 1:P %extract P random examples within the training set
+                    %Note: this way the same example might be
+                    %presented more than once
+    k = randi(P);
     input = train(:,k);
     tau = train_labels(k);
     ss_error = evaluate_error(w,input,tau); %single step "mean squared" error
@@ -49,6 +51,6 @@ for t = tvec
   end
   %save MSE at current training time for both training and test sets
   MSEvec_train(t) = evaluate_MSE(train,train_labels,w);
-  MSEvec_gen(t) = evaluate_MSE(test,test_labels,w);
+  MSEvec_gen(t)   = evaluate_MSE(test,test_labels,w);
 end
 end
