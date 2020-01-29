@@ -9,7 +9,7 @@ nhidden = 2;
 norm1 = true;
 tmax = 1e4;
 eta0 = 1;
-alpha = [0.01 0.1 1 10 100 500];
+alpha = [0.01 0.1 1 10 100];
 nalphas = size(alpha,2);
 
 finalMSEtrain = zeros([1,nalphas]);
@@ -28,13 +28,13 @@ for i = 1:nalphas
     %{
     subplot(1,2,1);
     figure(i);
-    plot_MSE(MSEvec_train,MSEvec_gen,tmax,P,Q,eta0,false,alpha(i));
+    plot_MSE(MSEvec_train,MSEvec_gen,tmax,P,Q,eta0,alpha(i));
     subplot(1,2,2);
     plot_w(w,nhidden);
     %}
   end
   finalMSEtrain(i) = finalMSEt/reps;
-  finalMSEgen(i)   = finalMSEg/reps;
+  finalMSEgen(i)   = finalMSEg/reps; 
 end
 
 figure(nalphas+1);
