@@ -2,7 +2,7 @@
 
 clear all 
 
-P = 50; % 500
+P = 500;
 Q = 100;
 first = false;
 nhidden = 2;
@@ -14,7 +14,7 @@ nalphas = size(alpha,2);
 
 finalMSEtrain = zeros([1,nalphas]);
 finalMSEgen   = zeros([1,nalphas]);
-reps = 1;  % 10
+reps = 10;
 
 for i = 1:nalphas
   fprintf('doing alpha = %.2f \n',alpha(i));

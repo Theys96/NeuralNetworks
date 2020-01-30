@@ -2,7 +2,7 @@
 
 clear all 
 
-P = 100; % 500
+P = 500;
 Q = 100;
 first = false;
 nhidden = 2;
@@ -14,7 +14,7 @@ netas = size(eta,2);
 finalMSEtrain = zeros([1,netas]);
 finalMSEgen   = zeros([1,netas]);
 
-reps = 1; % 10
+reps = 10;
 
 for i = 1:netas
   fprintf('doing eta = %.2f \n',eta(i));
